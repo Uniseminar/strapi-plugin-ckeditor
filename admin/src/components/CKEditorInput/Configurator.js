@@ -27,6 +27,108 @@ import ckeditor5MaximumLengthDll from "@reinmar/ckeditor5-maximum-length/build/m
 import { StrapiMediaLib } from "./plugins/StrapiMediaLib";
 
 const CKEDITOR_BASE_CONFIG_FOR_PRESETS = {
+  custom: {
+    plugins: [
+      window.CKEditor5.alignment.Alignment,
+      window.CKEditor5.autoformat.Autoformat,
+      window.CKEditor5.basicStyles.Bold,
+      window.CKEditor5.basicStyles.Italic,
+      window.CKEditor5.basicStyles.Underline,
+      window.CKEditor5.basicStyles.Strikethrough,
+      window.CKEditor5.basicStyles.Code,
+      window.CKEditor5.basicStyles.Subscript,
+      window.CKEditor5.basicStyles.Superscript,
+      window.CKEditor5.essentials.Essentials,
+      window.CKEditor5.font.FontColor,
+      window.CKEditor5.findAndReplace.FindAndReplace,
+      window.CKEditor5.heading.Heading,
+      window.CKEditor5.image.Image,
+      window.CKEditor5.image.ImageCaption,
+      window.CKEditor5.image.ImageStyle,
+      window.CKEditor5.image.ImageToolbar,
+      window.CKEditor5.image.ImageUpload,
+      window.CKEditor5.image.ImageResize,
+      window.CKEditor5.indent.Indent,
+      window.CKEditor5.indent.IndentBlock,
+      window.CKEditor5.link.Link,
+      window.CKEditor5.link.LinkImage,
+      window.CKEditor5.list.List,
+      window.CKEditor5.list.ListProperties,
+      window.CKEditor5.paragraph.Paragraph,
+      window.CKEditor5.pasteFromOffice.PasteFromOffice,
+      window.CKEditor5.removeFormat.RemoveFormat,
+      window.CKEditor5.specialCharacters.SpecialCharacters,
+      window.CKEditor5.specialCharacters.SpecialCharactersEssentials,
+      window.CKEditor5.wordCount.WordCount,
+      window.CKEditor5.highlight.Highlight,
+      StrapiMediaLib
+    ],
+    toolbar: {
+      items: [
+        'undo', 'redo', 'findAndReplace',
+        '|',
+        'link', 'strapiMediaLib',
+        '|',
+        'bulletedList', 'outdent', 'indent',
+        '-',
+        'heading',
+        '|',
+        'alignment', 'fontColor', 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'specialCharacters', 'removeFormat',
+
+      ],
+      shouldNotGroupWhenFull: true
+    },
+    heading: {
+      options: [
+        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+        { model: 'heading3', view: 'h3', title: 'Heading', class: 'ck-heading_heading3' },
+      ]
+    },
+    list: {
+      properties: {
+        styles: true,
+        startIndex: true,
+        reversed: true
+      }
+    },
+    image: {
+      resizeUnit: "%",
+      resizeOptions: [{
+        name: 'resizeImage:original',
+        value: null,
+        icon: 'original'
+      },
+      {
+        name: 'resizeImage:25',
+        value: '25',
+        icon: 'small'
+      },
+      {
+        name: 'resizeImage:50',
+        value: '50',
+        icon: 'medium'
+      },
+      {
+        name: 'resizeImage:75',
+        value: '75',
+        icon: 'large'
+      }],
+      toolbar: [
+        'imageStyle:inline', 'imageStyle:block', 'imageStyle:side',
+        '|',
+        'toggleImageCaption', 'imageTextAlternative',
+        '|',
+        'linkImage',
+        '|',
+        'resizeImage:25', 'resizeImage:50', 'resizeImage:75', 'resizeImage:original'
+      ]
+    },
+    fontColor: {
+      columns: 5,
+      documentColors: 10,
+    },
+  },
+
   light: {
     plugins: [
       window.CKEditor5.autoformat.Autoformat,
@@ -216,23 +318,31 @@ const CKEDITOR_BASE_CONFIG_FOR_PRESETS = {
     ],
     toolbar: {
       items: [
-        'undo', 'redo', 'findAndReplace',
+        'undo', 'redo',
         '|',
-        'link', 'strapiMediaLib',
+        'findAndReplace', 'selectAll',
         '|',
-        'bulletedList', 'outdent', 'indent',
-        '-',
         'heading',
         '|',
-        'alignment', 'fontColor', 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'specialCharacters', 'removeFormat',
-
+        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor',
+        '|',
+        'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'code', 'removeFormat',
+        '-',
+        'link', 'strapiMediaLib', 'mediaEmbed', 'insertTable', 'horizontalLine', 'blockQuote', 'codeBlock', 'htmlEmbed', 'specialCharacters', 'highlight',
+        '|',
+        'alignment',
+        '|',
+        'bulletedList', 'numberedList', 'todoList', 'outdent', 'indent',
       ],
       shouldNotGroupWhenFull: true
     },
     heading: {
       options: [
         { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-        { model: 'heading3', view: 'h3', title: 'Heading', class: 'ck-heading_heading3' },
+        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+        { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+        { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
       ]
     },
     list: {
@@ -356,6 +466,8 @@ export default class Configurator {
     const presetName = this.fieldConfig.options.preset;
 
     switch (presetName) {
+      case 'custom':
+        return CKEDITOR_BASE_CONFIG_FOR_PRESETS.custom;
       case 'light':
         return CKEDITOR_BASE_CONFIG_FOR_PRESETS.light;
       case 'standard':
