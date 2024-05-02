@@ -69,7 +69,7 @@ const CKEDITOR_BASE_CONFIG_FOR_PRESETS = {
         '|',
         'link', 'strapiMediaLib',
         '|',
-        'bulletedList', 'outdent', 'indent',
+        'bulletedList', 'numberedList', 'outdent', 'indent',
         '-',
         'heading',
         '|',

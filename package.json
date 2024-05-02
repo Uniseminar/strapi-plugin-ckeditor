@@ -1,6 +1,6 @@
 {
-  "name": "@Uniseminar/strapi-plugin-ckeditor",
-  "version": "0.0.12",
+  "name": "@uniseminar/strapi-plugin-ckeditor",
+  "version": "0.0.13",
   "description": "CKEditor 5 custom field for Strapi.",
   "keywords": [
     "strapi",
@@ -70,7 +70,7 @@
     "npm": ">=6.0.0"
   },
   "publishConfig": {
-    "@Uniseminar:registry": "https://npm.pkg.github.com"
+    "@uniseminar:registry": "https://npm.pkg.github.com"
   },
   "strapi": {
     "name": "ckeditor",
