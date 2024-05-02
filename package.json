@@ -1,6 +1,6 @@
 {
-  "name": "@uniseminar/strapi-plugin-ckeditor",
-  "version": "0.0.14",
+  "name": "@Uniseminar/strapi-plugin-ckeditor",
+  "version": "0.0.13",
   "description": "CKEditor 5 custom field for Strapi.",
   "keywords": [
     "strapi",
@@ -14,7 +14,7 @@
   "homepage": "https://market.strapi.io/plugins/@ckeditor-strapi-plugin-ckeditor",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Uniseminar/strapi-plugin-ckeditor.git"
+    "url": "https://github.com/Uniseminar/strapi-plugin-ckeditor.git"
   },
   "license": "MIT",
   "author": "CKSource (http://cksource.com/)",
@@ -70,7 +70,7 @@
     "npm": ">=6.0.0"
   },
   "publishConfig": {
-    "@uniseminar:registry": "https://npm.pkg.github.com"
+    "@Uniseminar:registry": "https://npm.pkg.github.com"
   },
   "strapi": {
     "name": "ckeditor",
