@@ -14,7 +14,7 @@
   "homepage": "https://market.strapi.io/plugins/@ckeditor-strapi-plugin-ckeditor",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Uniseminar/strapi-plugin-ckeditor.git"
+    "url": "git+https://github.com/Uniseminar/strapi-plugin-ckeditor.git"
   },
   "license": "MIT",
   "author": "CKSource (http://cksource.com/)",
