@@ -124,7 +124,7 @@ const CKEDITOR_BASE_CONFIG_FOR_PRESETS = {
         '|',
         'linkImage',
         '|',
-        'resizeImage:25', 'resizeImage:50', 'resizeImage:75', 'resizeImage:original',
+        'resizeImage:25', 'resizeImage:50', 'resizeImage:75', 'resizeImage:original'
       ]
     },
     fontColor: {
