@@ -26,85 +26,90 @@ const CKEditorInput = ({
   description,
   error
 }) => {
-  const [ editorInstance, setEditorInstance ] = useState(false);
+  const [editorInstance, setEditorInstance] = useState(false);
   const { formatMessage } = useIntl();
-  const { maxLengthCharacters:maxLength , ...options } = attribute.options;
-  const configurator = new Configurator( { options, maxLength } );
+  const { maxLengthCharacters: maxLength, ...options } = attribute.options;
+  const configurator = new Configurator({ options, maxLength });
   const editorConfig = configurator.getEditorConfig();
 
-  const wordCounter = useRef( null );
+  const wordCounter = useRef(null);
 
-  const strapiTheme = localStorage.getItem( 'STRAPI_THEME' );
-  const GlobalStyling = getGlobalStyling( strapiTheme );
+  const strapiTheme = localStorage.getItem('STRAPI_THEME');
+  const GlobalStyling = getGlobalStyling(strapiTheme);
 
-  const [ mediaLibVisible, setMediaLibVisible ] = useState( false );
+  const [mediaLibVisible, setMediaLibVisible] = useState(false);
 
-  const handleToggleMediaLib = () => setMediaLibVisible( prev => !prev );
+  const handleToggleMediaLib = () => setMediaLibVisible(prev => !prev);
 
   const handleChangeAssets = assets => {
     let imageHtmlString = '';
 
-    assets.map( asset => {
-      if ( asset.mime.includes('image') ) {
-        const url = sanitize( asset.url );
-        const alt = sanitize( asset.alt );
+    assets.map(asset => {
+      if (asset.mime.includes('image')) {
+        console.log(asset);
+        const url = sanitize(asset.url);
+        const alt = sanitize(asset.alt);
+        const width = asset.width;
+        const height = asset.height;
 
-        imageHtmlString += `<img src="${ url }" alt="${ alt }" />`;
+        imageHtmlString += `<img src="${url}" alt="${alt}" width="${width || '100%'}" height="${height || '100%'} "/>`;
       }
-    } );
+    });
 
-    const viewFragment = editorInstance.data.processor.toView( imageHtmlString );
-    const modelFragment = editorInstance.data.toModel( viewFragment );
-    editorInstance.model.insertContent( modelFragment );
+    const viewFragment = editorInstance.data.processor.toView(imageHtmlString);
+    const modelFragment = editorInstance.data.toModel(viewFragment);
+    editorInstance.model.insertContent(modelFragment);
+
+    console.log(assets);
 
     handleToggleMediaLib();
   };
 
   return (
     <Field
-      name= {name }
-      id={ name }
+      name={name}
+      id={name}
       // GenericInput calls formatMessage and returns a string for the error
-      error={ error }
-      hint={ description && formatMessage( description ) }
+      error={error}
+      hint={description && formatMessage(description)}
     >
-      <Stack spacing={ 1 }>
-        <FieldLabel action={ labelAction } required={ required }>
-          { formatMessage( intlLabel ) }
+      <Stack spacing={1}>
+        <FieldLabel action={labelAction} required={required}>
+          {formatMessage(intlLabel)}
         </FieldLabel>
         <GlobalStyling />
         <CKEditor
-          editor={ window.CKEditor5.editorClassic.ClassicEditor }
-          disabled={ disabled }
-          data={ value }
-          onReady={ ( editor ) => {
-            const wordCountPlugin = editor.plugins.get( 'WordCount' );
+          editor={window.CKEditor5.editorClassic.ClassicEditor}
+          disabled={disabled}
+          data={value}
+          onReady={(editor) => {
+            const wordCountPlugin = editor.plugins.get('WordCount');
             const wordCountWrapper = wordCounter.current;
-            wordCountWrapper.appendChild( wordCountPlugin.wordCountContainer );
+            wordCountWrapper.appendChild(wordCountPlugin.wordCountContainer);
 
-            const mediaLibPlugin = editor.plugins.get( 'strapiMediaLib' );
-            mediaLibPlugin.connect( handleToggleMediaLib );
+            const mediaLibPlugin = editor.plugins.get('strapiMediaLib');
+            mediaLibPlugin.connect(handleToggleMediaLib);
 
-            setEditorInstance( editor );
+            setEditorInstance(editor);
           }}
-          onChange={ ( event, editor ) => {
+          onChange={(event, editor) => {
             const data = editor.getData();
-            onChange( { target: { name, value: data } } );
+            onChange({ target: { name, value: data } });
 
-            const wordCountPlugin = editor.plugins.get( 'WordCount' );
+            const wordCountPlugin = editor.plugins.get('WordCount');
             const numberOfCharacters = wordCountPlugin.characters;
 
-            if ( numberOfCharacters > maxLength ) {
-              console.log( 'Too long' );
+            if (numberOfCharacters > maxLength) {
+              console.log('Too long');
             }
           }}
-          config={ editorConfig }
+          config={editorConfig}
         />
-        <div ref={ wordCounter }></div>
+        <div ref={wordCounter}></div>
         <FieldHint />
         <FieldError />
       </Stack>
-      <MediaLib isOpen={ mediaLibVisible } onChange={ handleChangeAssets } onToggle={ handleToggleMediaLib } />
+      <MediaLib isOpen={mediaLibVisible} onChange={handleChangeAssets} onToggle={handleToggleMediaLib} />
     </Field>
   );
 };
