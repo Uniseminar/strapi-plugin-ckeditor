@@ -42,7 +42,7 @@ const CKEDITOR_BASE_CONFIG_FOR_PRESETS = {
       window.CKEditor5.font.FontColor,
       window.CKEditor5.findAndReplace.FindAndReplace,
       window.CKEditor5.heading.Heading,
-      window.CKEditor5.image.Image,
+      window.CKEditor5.image.ImageBlock,
       window.CKEditor5.image.ImageCaption,
       window.CKEditor5.image.ImageStyle,
       window.CKEditor5.image.ImageToolbar,
@@ -92,29 +92,33 @@ const CKEDITOR_BASE_CONFIG_FOR_PRESETS = {
       }
     },
     image: {
+      styles: {
+        options: ['block']
+      },
       resizeUnit: "%",
-      resizeOptions: [{
-        name: 'resizeImage:original',
-        value: null,
-        icon: 'original'
-      },
-      {
-        name: 'resizeImage:25',
-        value: '25',
-        icon: 'small'
-      },
-      {
-        name: 'resizeImage:50',
-        value: '50',
-        icon: 'medium'
-      },
-      {
-        name: 'resizeImage:75',
-        value: '75',
-        icon: 'large'
-      }],
+      resizeOptions: [
+        {
+          name: 'resizeImage:25',
+          value: '25',
+          icon: 'small'
+        },
+        {
+          name: 'resizeImage:50',
+          value: '50',
+          icon: 'medium'
+        },
+        {
+          name: 'resizeImage:75',
+          value: '75',
+          icon: 'large'
+        },
+        {
+          name: 'resizeImage:original',
+          value: null,
+          icon: 'original'
+        },],
       toolbar: [
-        'imageStyle:inline', 'imageStyle:block', 'imageStyle:side',
+        'imageStyle:block',
         '|',
         'toggleImageCaption', 'imageTextAlternative',
         '|',
