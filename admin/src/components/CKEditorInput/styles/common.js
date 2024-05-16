@@ -75,10 +75,14 @@ export const style = css`
       margin-left: 2rem;
     }
 
-    .ck-content ul,
-    .ck-content ol {
-      list-style: none;
+    ul,
+    ol {
+      list-style: initial;
       margin-left: 2rem;
+    }
+
+    ol {
+      list-style: decimal;
     }
 
     sub {
