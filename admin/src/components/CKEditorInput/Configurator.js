@@ -59,6 +59,12 @@ const CKEDITOR_BASE_CONFIG_FOR_PRESETS = {
       window.CKEditor5.removeFormat.RemoveFormat,
       window.CKEditor5.specialCharacters.SpecialCharacters,
       window.CKEditor5.specialCharacters.SpecialCharactersEssentials,
+      window.CKEditor5.table.Table,
+      window.CKEditor5.table.TableToolbar,
+      window.CKEditor5.table.TableProperties,
+      window.CKEditor5.table.TableCellProperties,
+      window.CKEditor5.table.TableColumnResize,
+      window.CKEditor5.table.TableCaption,
       window.CKEditor5.wordCount.WordCount,
       window.CKEditor5.highlight.Highlight,
       StrapiMediaLib
@@ -69,7 +75,7 @@ const CKEDITOR_BASE_CONFIG_FOR_PRESETS = {
         '|',
         'link', 'strapiMediaLib',
         '|',
-        'bulletedList', 'numberedList', 'outdent', 'indent',
+        'bulletedList', 'numberedList', 'outdent', 'indent', 'insertTable',
         '-',
         'heading',
         '|',
@@ -130,6 +136,18 @@ const CKEDITOR_BASE_CONFIG_FOR_PRESETS = {
     fontColor: {
       columns: 5,
       documentColors: 10,
+    },
+    table: {
+      contentToolbar: [
+        'tableColumn',
+        'tableRow',
+        'mergeTableCells',
+        '|',
+        'tableCellProperties',
+        'tableProperties',
+        '|',
+        'toggleTableCaption'
+      ]
     },
   },
 
