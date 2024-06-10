@@ -26,6 +26,15 @@ import ckeditor5WordCountDll from "@ckeditor/ckeditor5-word-count/build/word-cou
 import ckeditor5MaximumLengthDll from "@reinmar/ckeditor5-maximum-length/build/maximum-length.js";
 import { StrapiMediaLib } from "./plugins/StrapiMediaLib";
 
+function SpecialCharactersExtended(editor) {
+  editor.plugins.get('SpecialCharacters').addItems('Arrows', [
+    {
+      title: 'Long Left Right Double Arrow', character: '⟺'
+    },
+    { title: 'Left Right Double Arrow', character: '⇔' }
+  ]);
+}
+
 const CKEDITOR_BASE_CONFIG_FOR_PRESETS = {
   custom: {
     plugins: [
@@ -67,7 +76,8 @@ const CKEDITOR_BASE_CONFIG_FOR_PRESETS = {
       window.CKEditor5.table.TableCaption,
       window.CKEditor5.wordCount.WordCount,
       window.CKEditor5.highlight.Highlight,
-      StrapiMediaLib
+      StrapiMediaLib,
+      SpecialCharactersExtended
     ],
     toolbar: {
       items: [
