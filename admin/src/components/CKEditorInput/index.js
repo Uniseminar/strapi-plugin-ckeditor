@@ -46,7 +46,6 @@ const CKEditorInput = ({
 
     assets.map(asset => {
       if (asset.mime.includes('image')) {
-        console.log(asset);
         const url = sanitize(asset.url);
         const alt = sanitize(asset.alt);
         const width = asset.width;
@@ -59,8 +58,6 @@ const CKEditorInput = ({
     const viewFragment = editorInstance.data.processor.toView(imageHtmlString);
     const modelFragment = editorInstance.data.toModel(viewFragment);
     editorInstance.model.insertContent(modelFragment);
-
-    console.log(assets);
 
     handleToggleMediaLib();
   };
@@ -82,6 +79,7 @@ const CKEditorInput = ({
           editor={window.CKEditor5.editorClassic.ClassicEditor}
           disabled={disabled}
           data={value}
+          id={name}
           onReady={(editor) => {
             const wordCountPlugin = editor.plugins.get('WordCount');
             const wordCountWrapper = wordCounter.current;
