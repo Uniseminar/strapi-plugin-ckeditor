@@ -21,8 +21,16 @@ export class RemoveLineBreaks extends Plugin {
       });
 
       button.on('execute', () => {
-        const data = editor.getData();
-        editor.setData(data.replace(/<br>|<\/p><p>/g, ' '));
+        const selection = editor.model.document.selection;
+        const range = selection.getRanges();
+        const selectedContent = editor.model.getSelectedContent(selection);
+        const selectedData = editor.data.stringify(selectedContent);
+        const trimmedData = selectedData.replace(/<br>|<\/p><p>|&nbsp;/g, ' ');
+
+        const viewFragment = editor.data.processor.toView(trimmedData);
+        const modelFragment = editor.data.toModel(viewFragment);
+
+        editor.model.insertContent(modelFragment, range);
       });
 
       return button;
