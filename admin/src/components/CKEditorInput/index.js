@@ -92,6 +92,7 @@ const CKEditorInput = ({
           }}
           onChange={(event, editor) => {
             const data = editor.getData();
+
             onChange({ target: { name, value: data } });
 
             const wordCountPlugin = editor.plugins.get('WordCount');
