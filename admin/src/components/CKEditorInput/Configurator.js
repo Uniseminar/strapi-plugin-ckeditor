@@ -25,6 +25,7 @@ import ckeditor5TableDll from "@ckeditor/ckeditor5-table/build/table.js";
 import ckeditor5WordCountDll from "@ckeditor/ckeditor5-word-count/build/word-count.js";
 import ckeditor5MaximumLengthDll from "@reinmar/ckeditor5-maximum-length/build/maximum-length.js";
 import { StrapiMediaLib } from "./plugins/StrapiMediaLib";
+import { RemoveLineBreaks } from "./plugins/RemoveLineBreaks";
 
 function SpecialCharactersExtended(editor) {
   editor.plugins.get('SpecialCharacters').addItems('Arrows', [
@@ -77,11 +78,12 @@ const CKEDITOR_BASE_CONFIG_FOR_PRESETS = {
       window.CKEditor5.wordCount.WordCount,
       window.CKEditor5.highlight.Highlight,
       StrapiMediaLib,
-      SpecialCharactersExtended
+      SpecialCharactersExtended,
+      RemoveLineBreaks
     ],
     toolbar: {
       items: [
-        'undo', 'redo', 'findAndReplace',
+        'undo', 'redo', 'findAndReplace', 'removeLineBreaks',
         '|',
         'link', 'strapiMediaLib',
         '|',
